@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
+
+require 'core'
+
+Signal.trap("INT"){}
+
+ARGV << '-h' if ARGV.empty?
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Generate starter code for different coding environments.\n\nUsage: #{File.basename($PROGRAM_NAME)} [options] [task] NewProjectName\nRadon version: #{Paint[VERSION, '#2ecc71']}"
+  opts.separator Paint["\nGlobal Options: ", '#95a5a6']
+
+
+  opts.on('--list-env', 'List all supported environments') do
+    all = Radon::Environments.getAllNames
+    puts "Supported environments are:"
+    all.each do |e|
+      puts "  #{e}"
+    end
+  end
+
+  opts.on('-q', '--quiet', 'Run with suppresed console output.') do
+    $quiet = true
+  end
+
+  opts.on('--verbose', 'Run verbosely') do
+    $verbose = true
+  end
+
+  opts.on('-v', '--version', 'Show the krypton version and exit') do
+    puts "Krypton version: #{Paint[VERSION, '#2ecc71']}"
+    exit 0
+  end
+
+  opts.on('-h', '--help', 'Show this help message') do
+    puts opts
+    exit
+  end
+
+
+end.parse!(ARGV)
+
+while (opt = ARGV.shift) do
+  if Radon::Environments.getAllNames.include? opt
+    Radon::Environments.extract(opt, ARGV[0])
+    puts Paint["Done! Your project is set up in #{File.expand_path(ARGV[0])}.", :bold, :bright]
+    exit 0
+  else
+    error "#{opt} is not a supported environment!"
+    exit 1
+  end
+end
