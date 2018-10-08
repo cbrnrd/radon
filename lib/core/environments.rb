@@ -4,7 +4,7 @@ class Environments
   @@all = {
           'gradle' => File.join(DATA_DIR, "gradle.zip"),
           'java'   => File.join(DATA_DIR, "java.zip"),
-          'maven'  => File.join(DATA_DIR, "maven.zip")
+          'maven'  => File.join(DATA_DIR, "maven.zip"),
           'python' => File.join(DATA_DIR, "python.zip"),
           'ruby (beta)'   => File.join(DATA_DIR, "ruby.zip")
         }
