@@ -10,12 +10,16 @@ def extract_java(target)
   extract_zip(Radon::Environments.getTargetOf('java'), target)
 end
 
+def extract_maven(target)
+  extract_zip(Radon::Environments.getTargetOf('maven'), target)
+end
+
 def extract_python(target)
   extract_zip(Radon::Environments.getTargetOf('python'), target)
 end
 
 def extract_ruby(target)
-  extract_zip(Radon::Environments.getTargetOf('ruby'), target)
+  extract_zip(Radon::Environments.getTargetOf('ruby (beta)'), target)
   find_and_replace_all(target, '{{NAME}}', projectify(target).split('-').collect(&:capitalize).join)
 end
 

@@ -1,4 +1,4 @@
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 PROJECT_ROOT = File.absolute_path(File.join(File.dirname(__FILE__), "..", ".."))
 DATA_DIR = File.absolute_path(File.join(PROJECT_ROOT, "data"))
