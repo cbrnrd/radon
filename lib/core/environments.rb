@@ -21,13 +21,13 @@ class Environments
   def self.extract(key, target)
     case key
     when 'gradle'
-      extractGradle(target)
+      extract_gradle(target)
     when 'java'
-      extractJava(target)
+      extract_java(target)
     when 'python'
-      extractPython(target)
+      extract_python(target)
     when 'ruby'
-      extractRuby(target)
+      extract_ruby(target)
     else
       error("#{key} is not a supported environment.\nYou can suggest it be added at https://github.com/cbrnrd/krypton/issues")
     end
