@@ -1,34 +1,71 @@
 # Radon
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/radon`. To experiment with that code, run `bin/console` for an interactive prompt.
+Radon creates starter code for all kinds of environments.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
+`radon` is part of the [periodic](https://periodic.now.sh) collection of apps. If you install `periodic-cli`, radon should come with it:
 
-```ruby
-gem 'radon'
-```
+    $ gem install periodic-cli
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Or install just the gem:
 
     $ gem install radon
 
 ## Usage
 
-TODO: Write usage instructions here
+The basic usage is as follows: `radon [environment] {ProjectName}`.
+
+A full list of supported environments can be found by running `radon --list-env`
+
+#### Example:
+
+Here is radon generating a gradle project called MyGradleProject
+```
+$ radon gradle MyGradleProject
+Creating project under /mnt/c/Users/Carter/Desktop/projects/MyGradleProject
+  create MyGradleProject
+  create MyGradleProject/.gradle/
+  create MyGradleProject/.gradle/4.5/
+  create MyGradleProject/.gradle/4.5/fileChanges/
+  create MyGradleProject/.gradle/4.5/fileChanges/last-build.bin
+  create MyGradleProject/.gradle/4.5/fileHashes/
+  create MyGradleProject/.gradle/4.5/fileHashes/fileHashes.bin
+  create MyGradleProject/.gradle/4.5/fileHashes/fileHashes.lock
+  create MyGradleProject/.gradle/4.5/taskHistory/
+  create MyGradleProject/.gradle/4.5/taskHistory/taskHistory.bin
+  create MyGradleProject/.gradle/4.5/taskHistory/taskHistory.lock
+  create MyGradleProject/.gradle/buildOutputCleanup/
+  create MyGradleProject/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+  create MyGradleProject/.gradle/buildOutputCleanup/cache.properties
+  create MyGradleProject/.gradle/buildOutputCleanup/outputFiles.bin
+  create MyGradleProject/build.gradle
+  create MyGradleProject/gradle/
+  create MyGradleProject/gradle/wrapper/
+  create MyGradleProject/gradle/wrapper/gradle-wrapper.jar
+  create MyGradleProject/gradle/wrapper/gradle-wrapper.properties
+  create MyGradleProject/gradlew
+  create MyGradleProject/gradlew.bat
+  create MyGradleProject/settings.gradle
+  create MyGradleProject/src/
+  create MyGradleProject/src/main/
+  create MyGradleProject/src/main/java/
+  create MyGradleProject/src/main/test/
+Done! Your project is set up in /mnt/c/Users/Carter/Desktop/projects/MyGradleProject.
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+#### Adding an environment
+If you want to add an environment to radon, here are the steps:
+1. Create the standard directory structure of that environment. This is usually found on the environment's website or just through convention.
+2. Zip all the files into one file (`zip -r env.zip .`)
+3. Save the zip data as base64 (`cat env.zip | base64 -w 0 > env.b64`)
+4. Put both the base64 data and the zip file in radon's `/data` folder.
+5. Add the function(s) in `extract.rb` to extract the _zip_ file to the target (See [here](https://github.com/cbrnrd/radon/blob/7cd141b5a61de6a8abaf0009a1a8cfd090f05e97/lib/core/extract.rb#L5))
+6. Add the environments to `@@all` in `environments.rb`
+7. Open a pull request
 
 ## Contributing
 
