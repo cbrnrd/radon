@@ -7,7 +7,8 @@ class Environments
           'maven'   => File.join(DATA_DIR, "maven.zip"),
           'python'  => File.join(DATA_DIR, "python.zip"),
           'crystal' => File.join(DATA_DIR, "crystal.zip"),
-          'ruby (beta)'   => File.join(DATA_DIR, "ruby.zip")
+          'ruby (beta)'   => File.join(DATA_DIR, "ruby.zip"),
+          'c' => File.join(DATA_DIR, "c.zip")
         }
 
   # Gets all environments as an array of strings      
@@ -34,6 +35,8 @@ class Environments
       extract_crystal(target)
     when 'maven'
       extract_maven(target)
+    when 'c'
+      extract_c(target)
     else
       error("#{key} is not a supported environment.\nYou can suggest it be added at https://github.com/cbrnrd/radon/issues")
     end
