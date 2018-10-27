@@ -2,10 +2,11 @@ require "core/constants"
 module Radon
 class Environments
   @@all = {
-          'gradle' => File.join(DATA_DIR, "gradle.zip"),
-          'java'   => File.join(DATA_DIR, "java.zip"),
-          'maven'  => File.join(DATA_DIR, "maven.zip"),
-          'python' => File.join(DATA_DIR, "python.zip"),
+          'gradle'  => File.join(DATA_DIR, "gradle.zip"),
+          'java'    => File.join(DATA_DIR, "java.zip"),
+          'maven'   => File.join(DATA_DIR, "maven.zip"),
+          'python'  => File.join(DATA_DIR, "python.zip"),
+          'crystal' => File.join(DATA_DIR, "crystal.zip"),
           'ruby (beta)'   => File.join(DATA_DIR, "ruby.zip")
         }
 
@@ -29,6 +30,8 @@ class Environments
       extract_python(target)
     when 'ruby'
       extract_ruby(target)
+    when 'crystal'
+      extract_crystal(target)
     when 'maven'
       extract_maven(target)
     else

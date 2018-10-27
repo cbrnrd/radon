@@ -23,6 +23,11 @@ def extract_ruby(target)
   find_and_replace_all(target, '{{NAME}}', projectify(target).split('-').collect(&:capitalize).join)
 end
 
+def extract_crystal(target)
+  extract_zip(Radon::Environments.getTargetOf('crystal'), target)
+  find_and_replace_all(target, '{{NAME}}', projectify(target).split('-').collect(&:capitalize).join)
+end
+
 # Extracts some zip data to the passed destination
 def extract_zip(file, destination)
   puts "Creating project under #{File.expand_path(destination)}" unless $quiet
