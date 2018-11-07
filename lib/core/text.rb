@@ -45,6 +45,7 @@ def skip(fname)
   puts Paint["  skip", '#f1c40f'] + " #{fname}" unless $quiet
 end
 
+# Gets the project name in capitalized format. Eg: MyProjectName
 def projectify(name)
   # Name becomes frozen for some reason
   name = name.gsub(/(.)([A-Z])/,'\1-\2')
@@ -58,12 +59,20 @@ def projectify(name)
   return name
 end
 
+# Prompts the user for input
+def ask(*args)
+  print(*args)
+  $stdin.gets.chomp
+end
+
+# Gets the project name in dash-seperated format. Eg: my-project-name
 def classify(name)
   name = name.gsub(/-[a-z]/) {|s| s.upcase }
   name.delete!('-')
   return name.slice(0,1).capitalize + name.slice(1..-1)
 end
 
+# Replaces `find` with `repl` in every file and directory
 def find_and_replace_all(target_dir, find, repl)
   files = Dir[File.join(target_dir,'**','*')]
   files.each do |file_name|
@@ -80,5 +89,12 @@ def find_and_replace_all(target_dir, find, repl)
       next
     end
   end
+end
 
+# Replaces all tokens in all files in the target directory
+def replace_all_tokens(target)
+  find_and_replace_all(target, '{{NAME}}', projectify(target))
+  find_and_replace_all(target, '{{CAPSNAME}}', classify(target))
+  find_and_replace_all(target, '{{EMAIL}}', Radon::Util.get_email)
+  find_and_replace_all(target, '{{GHNAME}}', Radon::Util.get_github_username)
 end

@@ -65,6 +65,7 @@ If you want to add an environment to radon, here are the steps:
 6. Add the environments to `@@all` in `environments.rb`
 7. Open a pull request
 
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/cbrnrd/radon. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.

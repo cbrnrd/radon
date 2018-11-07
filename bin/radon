@@ -43,6 +43,7 @@ OptionParser.new do |opts|
 end.parse!(ARGV)
 
 while (opt = ARGV.shift) do
+  Radon::Util.first_run
   if Radon::Environments.getAllNames.include? opt
     Radon::Environments.extract(opt, ARGV[0])
     puts Paint["Done! Your project is set up in #{File.expand_path(ARGV[0])}.", :bold, :bright]

@@ -20,7 +20,7 @@ end
 
 def extract_ruby(target)
   extract_zip(Radon::Environments.getTargetOf('ruby (beta)'), target)
-  find_and_replace_all(target, '{{NAME}}', projectify(target).split('-').collect(&:capitalize).join)
+  replace_all_tokens(target)
 end
 
 def extract_c(target)
@@ -29,8 +29,7 @@ end
 
 def extract_crystal(target)
   extract_zip(Radon::Environments.getTargetOf('crystal'), target)
-  find_and_replace_all(target, '{{NAME}}', projectify(target))#.split('-').collect(&:capitalize).join)
-  find_and_replace_all(target, '{{CAPSNAME}}', classify(target))
+  replace_all_tokens(target)
 end
 
 # Extracts some zip data to the passed destination
