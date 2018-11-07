@@ -65,6 +65,8 @@ If you want to add an environment to radon, here are the steps:
 6. Add the environments to `@@all` in `environments.rb`
 7. Open a pull request
 
+If the environment requires a project name (eg. ruby class name or file-names) you can put these token identifiers to be replaced during project creation:
+
 | Identifier        | Meaning           |
 | :-------------: |:-------------:|
 | `{{NAME}}`      | The dash-seperated project name (eg. `my-cool-project`) |
