@@ -65,6 +65,13 @@ If you want to add an environment to radon, here are the steps:
 6. Add the environments to `@@all` in `environments.rb`
 7. Open a pull request
 
+| Identifier        | Meaning           |
+| :-------------: |:-------------:|
+| `{{NAME}}`      | The dash-seperated project name (eg. `my-cool-project`) |
+| `{{CAPSNAME}}`      | The capitalized project name (eg. `MyCoolProject`) |
+| `{{EMAIL}}` | The email of the user |
+| `{{GHNAME}}` | The GitHub username of the user |
+
 
 ## Contributing
 
