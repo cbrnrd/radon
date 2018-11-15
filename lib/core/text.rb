@@ -5,10 +5,11 @@ def vprint(*args)
 end
 
 def error(*args)
-  puts Paint["ERROR", '#e74c3c'] + " - #{args}"
+  puts Paint["ERROR", '#e74c3c'] + " - #{args.join(' ')}"
 end
 
 def report_error_to_github(trace)
+  commit_string = File.directory?(File.join(PROJECT_ROOT, '.git')) ? "Commit `#{File.read(File.join(PROJECT_ROOT, '.git', 'refs', 'heads', 'master')).strip}`" : nil 
   puts %Q{
     :::::::::::::::::: COPY BELOW ::::::::::::::::::
     ### Ruby version
@@ -31,6 +32,8 @@ def report_error_to_github(trace)
     ```
     #{trace}
     ```
+
+    #{commit_string}
     :::::::::::::::::: COPY ABOVE ::::::::::::::::::
     #{Paint["Whoops! Looks like you've found a bug in radon. Please copy the text above and open a new issue at ", '#e74c3c'] + Paint['https://github.com/cbrnrd/radon/issues', :bold, :bright]}
   }
@@ -72,7 +75,7 @@ def classify(name)
   return name.slice(0,1).capitalize + name.slice(1..-1)
 end
 
-# Replaces `find` with `repl` in every file and directory
+# Replaces 'find' with 'repl' in every file and directory
 def find_and_replace_all(target_dir, find, repl)
   files = Dir[File.join(target_dir,'**','*')]
   files.each do |file_name|

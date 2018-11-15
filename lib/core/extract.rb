@@ -19,7 +19,7 @@ def extract_python(target)
 end
 
 def extract_ruby(target)
-  extract_zip(Radon::Environments.getTargetOf('ruby (beta)'), target)
+  extract_zip(Radon::Environments.getTargetOf('ruby'), target)
   replace_all_tokens(target)
 end
 
@@ -30,6 +30,10 @@ end
 def extract_crystal(target)
   extract_zip(Radon::Environments.getTargetOf('crystal'), target)
   replace_all_tokens(target)
+end
+
+def extract_go_s(target)
+  extract_zip(Radon::Environments.getTargetOf('go_s'), target)
 end
 
 # Extracts some zip data to the passed destination
