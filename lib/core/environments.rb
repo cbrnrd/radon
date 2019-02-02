@@ -11,7 +11,8 @@ class Environments
           'c'      => File.join(DATA_DIR, "c.zip"),
           'ruby'   => File.join(DATA_DIR, "ruby.zip"),
           'crystal'=> File.join(DATA_DIR, "crystal_app.zip"),
-          'go_s'   => File.join(DATA_DIR, "go_s.zip")
+          'go_s'   => File.join(DATA_DIR, "go_s.zip"),
+          'website'=> File.join(DATA_DIR, "website.zip")
         }
 
   # Gets all environments as an array of strings      

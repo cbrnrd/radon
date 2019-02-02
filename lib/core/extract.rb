@@ -36,6 +36,10 @@ def extract_go_s(target)
   extract_zip(Radon::Environments.getTargetOf('go_s'), target)
 end
 
+def extract_website(target)
+  extract_zip(Radon::Environments.getTargetOf('website'), target)
+end
+
 # Extracts some zip data to the passed destination
 def extract_zip(file, destination)
   puts "Creating project under #{File.expand_path(destination)}" unless $quiet
