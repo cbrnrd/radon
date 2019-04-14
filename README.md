@@ -53,6 +53,18 @@ Creating project under /mnt/c/Users/Carter/Desktop/projects/MyGradleProject
 Done! Your project is set up in /mnt/c/Users/Carter/Desktop/projects/MyGradleProject.
 ```
 
+## Supported Environments
+As of v0.1.7, the current supported environments are:
+* Gradle
+* Java
+* Maven
+* Python
+* C
+* Ruby
+* Crystal
+* Go (simple)
+* Website
+
 ## Development
 
 #### Adding an environment
