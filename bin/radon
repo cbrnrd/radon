@@ -3,33 +3,43 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib
 
 require 'core'
 
-Signal.trap("INT"){}
+Signal.trap('INT'){}
 
 ARGV << '-h' if ARGV.empty?
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Generate starter code for different coding environments.\n\nUsage: #{File.basename($PROGRAM_NAME)} [options] [task] NewProjectName\nRadon version: #{Paint[VERSION, '#2ecc71']}"
+  opts.banner = "Generate starter code for different coding environments.\n\nUsage: #{File.basename($PROGRAM_NAME)} [options] [env] NewProjectName\nRadon version: #{Paint[VERSION, '#2ecc71']}"
   opts.separator Paint["\nGlobal Options: ", '#95a5a6']
 
 
   opts.on('--list-env', 'List all supported environments') do
-    all = Radon::Environments.getAllNames
-    puts "Supported environments are:"
+    all = Radon::Environments.get_all_names
+    puts 'Supported environments are:'
     all.each do |e|
       puts "  #{e}"
     end
   end
 
-  opts.on('-q', '--quiet', 'Run with suppresed console output.') do
+  opts.on('-q', '--quiet', 'Run with suppressed console output.') do
     $quiet = true
+  end
+
+  opts.on('-O', '--open-vscode', 'Open the project in Visual Studio Code (if installed).') do
+    options[:open_vscode] = true
+    fail_with('You cannot open your project in both VSCode and Atom.') if options[:open_atom]
+  end
+  
+  opts.on('-a', '--open-atom', 'Open the project in Atom (if installed).') do
+    options[:open_atom] = true
+    fail_with('You cannot open your project in both VSCode and Atom.') if options[:open_vscode]
   end
 
   opts.on('--verbose', 'Run verbosely') do
     $verbose = true
   end
 
-  opts.on('-v', '--version', 'Show the krypton version and exit') do
+  opts.on('-v', '--version', 'Show the radon version and exit') do
     puts "Krypton version: #{Paint[VERSION, '#2ecc71']}"
     exit 0
   end
@@ -42,11 +52,13 @@ OptionParser.new do |opts|
 
 end.parse!(ARGV)
 
-while (opt = ARGV.shift) do
+while (opt = ARGV.shift)
   Radon::Util.first_run
-  if Radon::Environments.getAllNames.include? opt
+  if Radon::Environments.get_all_names.include? opt
     Radon::Environments.extract(opt, ARGV[0])
     puts Paint["Done! Your project is set up in #{File.expand_path(ARGV[0])}.", :bold, :bright]
+    Radon::Util.open_in_editor(options, ARGV[0]) if options[:open_vscode] || options[:open_atom]
+
     exit 0
   else
     error "#{opt} is not a supported environment!"

@@ -5,12 +5,12 @@ def vprint(*args)
 end
 
 def error(*args)
-  puts Paint["ERROR", '#e74c3c'] + " - #{args.join(' ')}"
+  puts Paint['ERROR', '#e74c3c'] + " - #{args.join(' ')}"
 end
 
 def report_error_to_github(trace)
   commit_string = File.directory?(File.join(PROJECT_ROOT, '.git')) ? "Commit `#{File.read(File.join(PROJECT_ROOT, '.git', 'refs', 'heads', 'master')).strip}`" : nil 
-  puts %Q{
+  puts %(
     :::::::::::::::::: COPY BELOW ::::::::::::::::::
     ### Ruby version
 
@@ -36,22 +36,22 @@ def report_error_to_github(trace)
     #{commit_string}
     :::::::::::::::::: COPY ABOVE ::::::::::::::::::
     #{Paint["Whoops! Looks like you've found a bug in radon. Please copy the text above and open a new issue at ", '#e74c3c'] + Paint['https://github.com/cbrnrd/radon/issues', :bold, :bright]}
-  }
+  )
   
 end
 
 def create(fname)
-  puts Paint["  create", '#2ecc71'] + " #{fname}" unless $quiet
+  puts Paint['  create', '#2ecc71'] + " #{fname}" unless $quiet
 end
 
 def skip(fname)
-  puts Paint["  skip", '#f1c40f'] + " #{fname}" unless $quiet
+  puts Paint['  skip', '#f1c40f'] + " #{fname}" unless $quiet
 end
 
 # Gets the project name in capitalized format. Eg: MyProjectName
 def projectify(name)
   # Name becomes frozen for some reason
-  name = name.gsub(/(.)([A-Z])/,'\1-\2')
+  name = name.gsub(/(.)([A-Z])/, '\1-\2')
   name.downcase!
   name.gsub!('..', '')
   name.gsub!('/', '')
