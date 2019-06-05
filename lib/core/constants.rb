@@ -1,5 +1,5 @@
 # The version
-VERSION = "0.1.7"
+VERSION = "0.1.8"
 
 # The root of this project
 PROJECT_ROOT = File.absolute_path(File.join(File.dirname(__FILE__), "..", ".."))
